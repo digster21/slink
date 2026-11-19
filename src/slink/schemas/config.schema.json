@@ -1,0 +1,33 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "slink config",
+    "description": "Slink configuration file",
+    "type": "object",
+    "required": ["links"],
+    "additionalProperties": false,
+    "properties": {
+        "links": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/link" }
+        }
+    },
+    "$defs": {
+        "link": {
+            "type": "object",
+            "required": ["source", "target"],
+            "additionalProperties": false,
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Path to the file in the dotfiles repo."
+                },
+                "target": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Where the symlink should be created."
+                }
+            }
+        }
+    }
+}

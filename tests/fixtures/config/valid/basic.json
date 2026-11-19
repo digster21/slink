@@ -1,0 +1,6 @@
+{
+    "links": [
+        { "source": "zsh/.zshrc", "target": "~/.zshrc" },
+        { "source": "git/.gitconfig", "target": "~/.gitconfig" }
+    ]
+}
