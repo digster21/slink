@@ -1,0 +1,28 @@
+name: CI
+
+on:
+    pull_request:
+    push:
+        branches: [main]
+
+jobs:
+    check_format_lint:
+        name: Format & lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v5
+
+            - uses: astral-sh/setup-uv@v7
+              with:
+                  enable-cache: true
+
+            - name: Install dependencies
+              id: sync
+              run: uv sync --locked
+
+            - name: Check formatting
+              run: uv run ruff format --check --diff .
+
+            - name: Lint
+              if: ${{ !cancelled() && steps.sync.outcome == 'success' }}
+              run: uv run ruff check --output-format=github .
